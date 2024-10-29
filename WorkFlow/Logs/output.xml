@@ -1,0 +1,1264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0.3 (Python 3.9.5 on win32)" generated="20210617 20:04:29.061" rpa="false" schemaversion="2">
+<suite id="s1" name="Workflow Runtime Testsuite" source="C:\WMIO1\WorkFlow\Scripts\workflow_runtime_testsuite.robot">
+<test id="s1-t1" name="Workflow Marketo has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1UoQkLMZLy">
+<kw name="read_csv">
+<arg>Marketo</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1UoQkLMZLy</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:29.408" level="INFO">Marketo has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:29.408" endtime="20210617 20:04:29.409"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:29.410" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1UoQkLMZLy, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:29.409" endtime="20210617 20:04:29.410"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:29.410" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:30.511" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1UoQkLMZLy/ 
+ path_url=/runflow/run/1UoQkLMZLy/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:30.512" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1UoQkLMZLy/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:09 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '29', 'ETag': 'W/"125-C1x5g6UJQwPLY1Pq9sIyovlHtWg"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid3fcb603a4b73f205dbc00a483cf1115608327bd20a76","flow_uid":"fl14736b74c9e18676236577","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:30.512" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:30.512" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:29.410" endtime="20210617 20:04:30.512"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:30.514" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid3fcb603a4b73f205dbc00a483cf1115608327bd20a76","flow_uid":"fl14736b74c9e18676236577","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:30.513" endtime="20210617 20:04:30.514"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:30.515" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:30.514" endtime="20210617 20:04:30.515"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:29.409" endtime="20210617 20:04:30.515"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:29.408" endtime="20210617 20:04:30.515"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:29.407" endtime="20210617 20:04:30.515"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:29.406" endtime="20210617 20:04:30.516"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:29.405" endtime="20210617 20:04:30.516"/>
+</test>
+<test id="s1-t2" name="Workflow AmazonDynamo_DB has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2cWSR4RvYs">
+<kw name="read_csv">
+<arg>AmazonDynamo_DB</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2cWSR4RvYs</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:30.520" level="INFO">AmazonDynamo_DB has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:30.519" endtime="20210617 20:04:30.520"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:30.521" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2cWSR4RvYs, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:30.521" endtime="20210617 20:04:30.521"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:30.522" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:31.555" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2cWSR4RvYs/ 
+ path_url=/runflow/run/2cWSR4RvYs/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:31.555" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2cWSR4RvYs/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:10 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '28', 'ETag': 'W/"125-3E4ElI13G/PWswBYpGk2lp7y2tQ"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid07f709f98e631c8ead52286354635891bffcb338d93f","flow_uid":"flc122e7c728540e96da2fa8","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:31.555" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:31.555" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:30.521" endtime="20210617 20:04:31.555"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:31.557" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid07f709f98e631c8ead52286354635891bffcb338d93f","flow_uid":"flc122e7c728540e96da2fa8","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:31.556" endtime="20210617 20:04:31.557"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:31.558" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:31.557" endtime="20210617 20:04:31.558"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:30.520" endtime="20210617 20:04:31.558"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:30.519" endtime="20210617 20:04:31.558"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:30.519" endtime="20210617 20:04:31.558"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:30.518" endtime="20210617 20:04:31.559"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:30.517" endtime="20210617 20:04:31.559"/>
+</test>
+<test id="s1-t3" name="Workflow AmazonSNS has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2aEU4H4W8M">
+<kw name="read_csv">
+<arg>AmazonSNS</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2aEU4H4W8M</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:31.563" level="INFO">AmazonSNS has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:31.562" endtime="20210617 20:04:31.563"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:31.564" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2aEU4H4W8M, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:31.563" endtime="20210617 20:04:31.564"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:31.564" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:32.588" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2aEU4H4W8M/ 
+ path_url=/runflow/run/2aEU4H4W8M/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:32.588" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2aEU4H4W8M/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:11 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '27', 'ETag': 'W/"125-JKemBKyC2Odnysc2YBjcWkxt2+E"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid7d6a8ca602a94e5c18ed57081ad85c54b91d19f35f85","flow_uid":"fl104fecc03c8c7d5cca0b0b","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:32.589" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:32.589" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:31.564" endtime="20210617 20:04:32.589"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:32.590" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid7d6a8ca602a94e5c18ed57081ad85c54b91d19f35f85","flow_uid":"fl104fecc03c8c7d5cca0b0b","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:32.589" endtime="20210617 20:04:32.590"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:32.592" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:32.591" endtime="20210617 20:04:32.592"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:31.563" endtime="20210617 20:04:32.592"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:31.562" endtime="20210617 20:04:32.592"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:31.561" endtime="20210617 20:04:32.592"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:31.561" endtime="20210617 20:04:32.592"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:31.560" endtime="20210617 20:04:32.593"/>
+</test>
+<test id="s1-t4" name="Workflow AmazonSQS has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/IYXc7WFXw">
+<kw name="read_csv">
+<arg>AmazonSQS</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/IYXc7WFXw</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:32.598" level="INFO">AmazonSQS has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:32.597" endtime="20210617 20:04:32.598"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:32.599" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/IYXc7WFXw, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:32.598" endtime="20210617 20:04:32.599"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:32.599" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:33.629" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/IYXc7WFXw/ 
+ path_url=/runflow/run/IYXc7WFXw/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:33.629" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/IYXc7WFXw/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:12 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '26', 'ETag': 'W/"125-c8bmulnuZYskrQrFsfmbXtDd7dc"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid7dc1ddc7484ea5337830cb10ef1623ad1d2416362af9","flow_uid":"flf92faf0b5ccefe52d8c6f9","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:33.629" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:33.629" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:32.599" endtime="20210617 20:04:33.629"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:33.629" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid7dc1ddc7484ea5337830cb10ef1623ad1d2416362af9","flow_uid":"flf92faf0b5ccefe52d8c6f9","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:33.629" endtime="20210617 20:04:33.631"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:33.632" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:33.631" endtime="20210617 20:04:33.632"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:32.598" endtime="20210617 20:04:33.632"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:32.597" endtime="20210617 20:04:33.632"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:32.596" endtime="20210617 20:04:33.632"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:32.596" endtime="20210617 20:04:33.632"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:32.595" endtime="20210617 20:04:33.633"/>
+</test>
+<test id="s1-t5" name="Workflow SalesforceCRM has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/11QS6zCbRC">
+<kw name="read_csv">
+<arg>SalesforceCRM</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/11QS6zCbRC</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:33.637" level="INFO">SalesforceCRM has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:33.637" endtime="20210617 20:04:33.637"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:33.638" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/11QS6zCbRC, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:33.638" endtime="20210617 20:04:33.638"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:33.639" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:34.675" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/11QS6zCbRC/ 
+ path_url=/runflow/run/11QS6zCbRC/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:34.675" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/11QS6zCbRC/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:14 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '25', 'ETag': 'W/"125-ShI8xOrg6qZTMGUEW0oWrHJlGJQ"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid936990bbc80861bc87b90a290d9181fb2e6aaea39c25","flow_uid":"flf13eda0cac92481df12ab7","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:34.675" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:34.675" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:33.639" endtime="20210617 20:04:34.675"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:34.676" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid936990bbc80861bc87b90a290d9181fb2e6aaea39c25","flow_uid":"flf13eda0cac92481df12ab7","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:34.675" endtime="20210617 20:04:34.676"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:34.678" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:34.676" endtime="20210617 20:04:34.678"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:33.637" endtime="20210617 20:04:34.678"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:33.636" endtime="20210617 20:04:34.678"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:33.636" endtime="20210617 20:04:34.678"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:33.635" endtime="20210617 20:04:34.678"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:33.634" endtime="20210617 20:04:34.678"/>
+</test>
+<test id="s1-t6" name="Workflow Atlassian_Jira has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2acvwdxF0c">
+<kw name="read_csv">
+<arg>Atlassian_Jira</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2acvwdxF0c</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:34.683" level="INFO">Atlassian_Jira has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:34.683" endtime="20210617 20:04:34.683"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:34.684" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2acvwdxF0c, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:34.684" endtime="20210617 20:04:34.684"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:34.685" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:35.722" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2acvwdxF0c/ 
+ path_url=/runflow/run/2acvwdxF0c/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:35.722" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2acvwdxF0c/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:15 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '24', 'ETag': 'W/"125-HQHmsEEYwUyaru+d+eczs4LteO8"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid2fd36f03badf275ed235f2fc09e67801e08dc47e064a","flow_uid":"flf7839bf49505eebb321744","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:35.722" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:35.723" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:34.685" endtime="20210617 20:04:35.723"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:35.724" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid2fd36f03badf275ed235f2fc09e67801e08dc47e064a","flow_uid":"flf7839bf49505eebb321744","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:35.723" endtime="20210617 20:04:35.724"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:35.725" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:35.724" endtime="20210617 20:04:35.726"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:34.683" endtime="20210617 20:04:35.726"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:34.683" endtime="20210617 20:04:35.726"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:34.683" endtime="20210617 20:04:35.726"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:34.681" endtime="20210617 20:04:35.726"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:34.680" endtime="20210617 20:04:35.727"/>
+</test>
+<test id="s1-t7" name="Workflow Cumulocity has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2vpfguNxYQ">
+<kw name="read_csv">
+<arg>Cumulocity</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2vpfguNxYQ</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:35.731" level="INFO">Cumulocity has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:35.731" endtime="20210617 20:04:35.731"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:35.732" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2vpfguNxYQ, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:35.732" endtime="20210617 20:04:35.732"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:35.733" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:36.776" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2vpfguNxYQ/ 
+ path_url=/runflow/run/2vpfguNxYQ/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:36.776" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2vpfguNxYQ/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:16 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '23', 'ETag': 'W/"125-YgoRt1na+iVlVThFmfuUmTUrHU0"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid450b0a87c6e439fca8f7fb8642b19d565e01d9332dad","flow_uid":"fl7bb952f63461f3bad9256c","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:36.776" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:36.777" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:35.733" endtime="20210617 20:04:36.777"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:36.778" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid450b0a87c6e439fca8f7fb8642b19d565e01d9332dad","flow_uid":"fl7bb952f63461f3bad9256c","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:36.777" endtime="20210617 20:04:36.778"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:36.780" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:36.779" endtime="20210617 20:04:36.780"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:35.731" endtime="20210617 20:04:36.780"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:35.730" endtime="20210617 20:04:36.780"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:35.730" endtime="20210617 20:04:36.780"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:35.729" endtime="20210617 20:04:36.780"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:35.728" endtime="20210617 20:04:36.781"/>
+</test>
+<test id="s1-t8" name="Workflow ServiceNow has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1MnUBqe9Zu">
+<kw name="read_csv">
+<arg>ServiceNow</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1MnUBqe9Zu</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:36.785" level="INFO">ServiceNow has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:36.785" endtime="20210617 20:04:36.785"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:36.786" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1MnUBqe9Zu, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:36.786" endtime="20210617 20:04:36.787"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:36.787" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:37.829" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1MnUBqe9Zu/ 
+ path_url=/runflow/run/1MnUBqe9Zu/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:37.829" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1MnUBqe9Zu/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:17 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '22', 'ETag': 'W/"125-LCf0avwEuwm2rrsbYWhdtQCL3Ak"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbidb4634c13dc9c56ad34627259d6b63f5e437fb4641144","flow_uid":"fle82deb0d8c2f0e33612ce7","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:37.829" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:37.830" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:36.787" endtime="20210617 20:04:37.830"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:37.831" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbidb4634c13dc9c56ad34627259d6b63f5e437fb4641144","flow_uid":"fle82deb0d8c2f0e33612ce7","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:37.830" endtime="20210617 20:04:37.831"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:37.832" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:37.831" endtime="20210617 20:04:37.832"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:36.785" endtime="20210617 20:04:37.833"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:36.784" endtime="20210617 20:04:37.833"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:36.784" endtime="20210617 20:04:37.833"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:36.783" endtime="20210617 20:04:37.833"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:36.782" endtime="20210617 20:04:37.834"/>
+</test>
+<test id="s1-t9" name="Workflow Shopify has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1rGpt4p5pO">
+<kw name="read_csv">
+<arg>Shopify</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1rGpt4p5pO</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:37.838" level="INFO">Shopify has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:37.838" endtime="20210617 20:04:37.838"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:37.839" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1rGpt4p5pO, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:37.839" endtime="20210617 20:04:37.839"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:37.840" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:38.885" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1rGpt4p5pO/ 
+ path_url=/runflow/run/1rGpt4p5pO/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:38.885" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/1rGpt4p5pO/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:18 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '21', 'ETag': 'W/"125-ttiJg7b93dVJvJNdXx/X5SJj2vk"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid106d5034e4ab6b1433014b53946faf247b4281a85ea4","flow_uid":"fla6557cba27cc5c2204a2de","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:38.885" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:38.886" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:37.840" endtime="20210617 20:04:38.886"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:38.887" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid106d5034e4ab6b1433014b53946faf247b4281a85ea4","flow_uid":"fla6557cba27cc5c2204a2de","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:38.886" endtime="20210617 20:04:38.887"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:38.888" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:38.887" endtime="20210617 20:04:38.888"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:37.838" endtime="20210617 20:04:38.889"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:37.837" endtime="20210617 20:04:38.889"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:37.837" endtime="20210617 20:04:38.889"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:37.836" endtime="20210617 20:04:38.889"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:37.835" endtime="20210617 20:04:38.890"/>
+</test>
+<test id="s1-t10" name="Workflow SAPC4C has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/bpwqYD2AM">
+<kw name="read_csv">
+<arg>SAPC4C</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/bpwqYD2AM</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:38.894" level="INFO">SAPC4C has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:38.894" endtime="20210617 20:04:38.894"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:38.895" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/bpwqYD2AM, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:38.895" endtime="20210617 20:04:38.896"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:38.896" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:39.913" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/bpwqYD2AM/ 
+ path_url=/runflow/run/bpwqYD2AM/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:39.913" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/bpwqYD2AM/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:19 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '20', 'ETag': 'W/"125-bBKz9vEZq73OHaF5q3Z72lIfx88"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbidae8c432ad285058f1fbd1bc927323ce39d0ea62b8c42","flow_uid":"flfc093747013eefb0495ebd","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:39.913" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:39.914" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:38.896" endtime="20210617 20:04:39.914"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:39.915" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbidae8c432ad285058f1fbd1bc927323ce39d0ea62b8c42","flow_uid":"flfc093747013eefb0495ebd","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:39.914" endtime="20210617 20:04:39.915"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:39.916" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:39.915" endtime="20210617 20:04:39.916"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:38.894" endtime="20210617 20:04:39.916"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:38.893" endtime="20210617 20:04:39.917"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:38.893" endtime="20210617 20:04:39.917"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:38.892" endtime="20210617 20:04:39.917"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:38.891" endtime="20210617 20:04:39.917"/>
+</test>
+<test id="s1-t11" name="Workflow WorkDay has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2jOPceyDYM">
+<kw name="read_csv">
+<arg>WorkDay</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2jOPceyDYM</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:39.922" level="INFO">WorkDay has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:39.921" endtime="20210617 20:04:39.922"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:39.923" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2jOPceyDYM, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:39.922" endtime="20210617 20:04:39.923"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:39.923" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:40.953" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2jOPceyDYM/ 
+ path_url=/runflow/run/2jOPceyDYM/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:40.953" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2jOPceyDYM/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:20 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '19', 'ETag': 'W/"125-RdhrIgttJuwFRFQJ60WCETcTfYw"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid2086c64d96354f7d71d8698536b7c2ce1e75e7aafeea","flow_uid":"fl884d55b0c4b12b5cc5d1b6","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:40.953" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:40.954" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:39.923" endtime="20210617 20:04:40.954"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:40.955" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid2086c64d96354f7d71d8698536b7c2ce1e75e7aafeea","flow_uid":"fl884d55b0c4b12b5cc5d1b6","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:40.954" endtime="20210617 20:04:40.955"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:40.956" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:40.955" endtime="20210617 20:04:40.956"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:39.922" endtime="20210617 20:04:40.957"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:39.921" endtime="20210617 20:04:40.957"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:39.920" endtime="20210617 20:04:40.957"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:39.920" endtime="20210617 20:04:40.957"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:39.919" endtime="20210617 20:04:40.957"/>
+</test>
+<test id="s1-t12" name="Workflow Amazon_Kinesis has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2AOjPqexEg">
+<kw name="read_csv">
+<arg>Amazon_Kinesis</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2AOjPqexEg</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:40.962" level="INFO">Amazon_Kinesis has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:40.961" endtime="20210617 20:04:40.962"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:40.963" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2AOjPqexEg, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:40.963" endtime="20210617 20:04:40.963"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:40.964" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:42.005" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2AOjPqexEg/ 
+ path_url=/runflow/run/2AOjPqexEg/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:42.005" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2AOjPqexEg/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:21 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '18', 'ETag': 'W/"125-UFLC8TBbSUq7uvA1I4cqKA2c9Hw"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid7b681e4d07d137fdcc43c5c1d045ad6985ddf0d55693","flow_uid":"fla18457d5c4c52ed0a42aba","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:42.005" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:42.006" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:40.964" endtime="20210617 20:04:42.006"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:42.007" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid7b681e4d07d137fdcc43c5c1d045ad6985ddf0d55693","flow_uid":"fla18457d5c4c52ed0a42aba","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:42.006" endtime="20210617 20:04:42.007"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:42.009" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:42.007" endtime="20210617 20:04:42.009"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:40.962" endtime="20210617 20:04:42.009"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:40.961" endtime="20210617 20:04:42.009"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:40.961" endtime="20210617 20:04:42.009"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:40.960" endtime="20210617 20:04:42.009"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:40.959" endtime="20210617 20:04:42.010"/>
+</test>
+<test id="s1-t13" name="Workflow Amazon_S3 has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/10fua0n7N2">
+<kw name="read_csv">
+<arg>Amazon_S3</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/10fua0n7N2</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:42.014" level="INFO">Amazon_S3 has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:42.014" endtime="20210617 20:04:42.014"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:42.015" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/10fua0n7N2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:42.015" endtime="20210617 20:04:42.016"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:42.016" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:43.043" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/10fua0n7N2/ 
+ path_url=/runflow/run/10fua0n7N2/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:04:43.043" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/10fua0n7N2/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:22 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '17', 'ETag': 'W/"125-4UaPWwk8PGN9NlNtNICa+cL4UBo"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid7d652c0eaab92ab7a350bab94812022b10d5d69a9f13","flow_uid":"flfe47a3f36a906e7fc8cb1f","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:04:43.043" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:04:43.044" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:42.016" endtime="20210617 20:04:43.044"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:43.045" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid7d652c0eaab92ab7a350bab94812022b10d5d69a9f13","flow_uid":"flfe47a3f36a906e7fc8cb1f","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:04:43.044" endtime="20210617 20:04:43.045"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:04:43.047" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:43.045" endtime="20210617 20:04:43.047"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:42.014" endtime="20210617 20:04:43.047"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:42.013" endtime="20210617 20:04:43.047"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:42.013" endtime="20210617 20:04:43.047"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:42.012" endtime="20210617 20:04:43.047"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:42.011" endtime="20210617 20:04:43.048"/>
+</test>
+<test id="s1-t14" name="Workflow Salesforce_CRM_REST has status https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2xvRPbOCoM">
+<kw name="read_csv">
+<arg>Salesforce_CRM_REST</arg>
+<arg>https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2xvRPbOCoM</arg>
+<arg>TRUE</arg>
+<doc>This keyword reads a csv and makes a get call to the url from the csv for which the execution status is true</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${Execute Status}'=='TRUE'</arg>
+<arg>run keywords</arg>
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keywords" library="BuiltIn">
+<arg>Log</arg>
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<arg>AND</arg>
+<arg>callWorkflowWebhook</arg>
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>${WorkflowName} has status ${Execute Status} hence executing</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:04:43.052" level="INFO">Salesforce_CRM_REST has status TRUE hence executing</msg>
+<status status="PASS" starttime="20210617 20:04:43.052" endtime="20210617 20:04:43.052"/>
+</kw>
+<kw name="callWorkflowWebhook">
+<arg>${WorkflowName}</arg>
+<arg>${Webhook URL}</arg>
+<doc>This keyword makes a get call to the url provided as argument. Accepts webhook url and workflow name as arguments</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>webhook</arg>
+<arg>${Webhook URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210617 20:04:43.053" level="INFO">Creating Session using : alias=webhook, url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2xvRPbOCoM, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210617 20:04:43.053" endtime="20210617 20:04:43.055"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>webhook</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20210617 20:04:43.055" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:05:05.139" level="INFO">GET Request : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2xvRPbOCoM/ 
+ path_url=/runflow/run/2xvRPbOCoM/ 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210617 20:05:05.139" level="INFO">GET Response : url=https://ipaasdev.int-aw-us.webmethods-int.io/runflow/run/2xvRPbOCoM/ 
+ status=200, reason=OK 
+ headers={'Server': 'wmio-int', 'Date': 'Thu, 17 Jun 2021 14:35:44 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'X-DNS-Prefetch-Control': 'off', 'X-Frame-Options': 'SAMEORIGIN, SAMEORIGIN', 'Strict-Transport-Security': 'max-age=15552000; includeSubDomains, max-age=86400; includeSubdomains; preload;, max-age=31536000; includeSubDomains', 'X-Download-Options': 'noopen', 'X-Content-Type-Options': 'nosniff, nosniff', 'X-XSS-Protection': '1; mode=block, 1; mode=block', 'Access-Control-Allow-Origin': 'undefined', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS,HEAD', 'Access-Control-Allow-Headers': 'Authorization, Content-Length, X-Requested-With, application_uid, application_id, application_api_key, admin_key, authtoken , Content-Type, org_uid, apikey,project_uid,tenant_uid', 'Access-Control-Max-Age': '1728000', 'X-Powered-By': 'Express', 'X-RateLimit-Limit': '30', 'X-RateLimit-Remaining': '16', 'ETag': 'W/"125-1kcdvcn4xc/bZuklaomsTRtrHH8"', 'Content-Encoding': 'gzip', 'Public-Key-Pins': 'pin-sha256="To_Check";  max-age=5184000; includeSubDomains;'} 
+ body={"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid2568c774ab2f8650e4214d26f3472c195ac2c5536133","flow_uid":"fl78ea239c8545b1b24e0786","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158} 
+ </msg>
+<msg timestamp="20210617 20:05:05.139" level="INFO">c:\users\sannr\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ipaasdev.int-aw-us.webmethods-int.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210617 20:05:05.140" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210617 20:04:43.055" endtime="20210617 20:05:05.140"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210617 20:05:05.141" level="INFO">{"message":"Workflow enqueued successfully.","status":"pending","bill_uid":"vbid2568c774ab2f8650e4214d26f3472c195ac2c5536133","flow_uid":"fl78ea239c8545b1b24e0786","project_uid":"fl982b7024f04160ab430d35","env_uid":"fl8a71ccb5aaf4d06bcebb15","tenant_uid":"fla8d3ac1d5be4261c2c476b","code":158}</msg>
+<status status="PASS" starttime="20210617 20:05:05.140" endtime="20210617 20:05:05.141"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<arg>msg=${WorkflowName} call failed.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210617 20:05:05.142" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210617 20:05:05.141" endtime="20210617 20:05:05.142"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:43.052" endtime="20210617 20:05:05.143"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:43.052" endtime="20210617 20:05:05.143"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:43.051" endtime="20210617 20:05:05.143"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:43.050" endtime="20210617 20:05:05.143"/>
+</kw>
+<status status="PASS" starttime="20210617 20:04:43.049" endtime="20210617 20:05:05.143"/>
+</test>
+<status status="PASS" starttime="20210617 20:04:29.065" endtime="20210617 20:05:05.146"/>
+</suite>
+<statistics>
+<total>
+<stat pass="14" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="14" fail="0" skip="0" id="s1" name="Workflow Runtime Testsuite">Workflow Runtime Testsuite</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20210617 20:04:29.410" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:30.522" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:31.564" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:32.599" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:33.639" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:34.685" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:35.733" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:36.787" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:37.840" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:38.896" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:39.923" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:40.964" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:42.016" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20210617 20:04:43.055" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+</errors>
+</robot>

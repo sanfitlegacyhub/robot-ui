@@ -1,0 +1,1896 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1 (Python 3.9.6 on win32)" generated="20210908 13:42:50.174" rpa="false" schemaversion="2">
+<suite id="s1" name="nfe Testsuite regression" source="C:\Users\sannr\OneDrive - Software AG\WMIO\wmio_ui_robo_cs_server\NewFlowEditor\Scripts\nfe_Testsuite_regression.robot">
+<kw name="Run Keywords" library="BuiltIn" type="SETUP">
+<arg>Set selenium timeout</arg>
+<arg>120s</arg>
+<arg>AND</arg>
+<arg>loadDB</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Set Selenium Timeout" library="SeleniumLibrary">
+<arg>120s</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" starttime="20210908 13:42:51.060" endtime="20210908 13:42:51.060"/>
+</kw>
+<kw name="loadDB" library="default_keywords">
+<doc>Loads the db.</doc>
+<kw name="Open Keepass Database" library="KeePassLibrary">
+<arg>${DB}</arg>
+<arg>keyfile=${keyfile}</arg>
+<doc>Opens the specified KeePass database ``filename`` using the credentials provided.</doc>
+<status status="PASS" starttime="20210908 13:42:51.061" endtime="20210908 13:42:51.868"/>
+</kw>
+<status status="PASS" starttime="20210908 13:42:51.061" endtime="20210908 13:42:51.868"/>
+</kw>
+<status status="PASS" starttime="20210908 13:42:51.060" endtime="20210908 13:42:51.868"/>
+</kw>
+<test id="s1-t1" name="CRUD_WorkdayV34_NFE">
+<kw name="loginWmio" library="default_keywords">
+<arg>${env}</arg>
+<doc>This keyword logs in a user based on environment. Expects environment as argument</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${env}'=="dev1"</arg>
+<arg>loginWmio_dev1</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="loginWmio_dev1" library="default_keywords">
+<doc>This keywords logs into wmiosanitydev.</doc>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${wmioUrl_dev1}</arg>
+<arg>${browser}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20210908 13:42:51.871" level="INFO">Opening browser 'chrome' to base url 'https://devrealm1.dev-int-aws-us.webmethods.io/#/'.</msg>
+<status status="PASS" starttime="20210908 13:42:51.870" endtime="20210908 13:42:55.337"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20210908 13:42:55.338" endtime="20210908 13:42:55.471"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${loginPageStatus}</var>
+<arg>wait until page contains element</arg>
+<arg>${PO_ LogintoyourAccount}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_ LogintoyourAccount}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:42:55.472" endtime="20210908 13:43:07.667"/>
+</kw>
+<msg timestamp="20210908 13:43:07.668" level="INFO">${loginPageStatus} = True</msg>
+<status status="PASS" starttime="20210908 13:42:55.471" endtime="20210908 13:43:07.668"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${loginPageStatus}'=='True'</arg>
+<arg>Log</arg>
+<arg>Login page found</arg>
+<arg>ELSE</arg>
+<arg>FATAL ERROR</arg>
+<arg>Login page is not found</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>Login page found</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210908 13:43:07.669" level="INFO">Login page found</msg>
+<status status="PASS" starttime="20210908 13:43:07.669" endtime="20210908 13:43:07.669"/>
+</kw>
+<status status="PASS" starttime="20210908 13:43:07.668" endtime="20210908 13:43:07.669"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_username}</arg>
+<arg>${uname_dev1}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:07.670" level="INFO">Typing text 'wstbvtuser' into text field 'xpath://*[@id="username"]'.</msg>
+<status status="PASS" starttime="20210908 13:43:07.669" endtime="20210908 13:43:07.777"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_password}</arg>
+<arg>${password_dev1}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:07.777" level="INFO">Typing text 'Welcome@1234' into text field 'xpath://*[@id="password"]'.</msg>
+<status status="PASS" starttime="20210908 13:43:07.777" endtime="20210908 13:43:07.895"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_login}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:07.896" level="INFO">Clicking element 'xpath://*[@name='login']'.</msg>
+<status status="PASS" starttime="20210908 13:43:07.896" endtime="20210908 13:43:10.468"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${loginStatus}</var>
+<arg>wait until page contains element</arg>
+<arg>${PO_postLoginScreenTitle}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_postLoginScreenTitle}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:10.469" endtime="20210908 13:43:15.619"/>
+</kw>
+<msg timestamp="20210908 13:43:15.619" level="INFO">${loginStatus} = True</msg>
+<status status="PASS" starttime="20210908 13:43:10.469" endtime="20210908 13:43:15.619"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${loginStatus}'=='True'</arg>
+<arg>Log</arg>
+<arg>Logged in successfully!</arg>
+<arg>ELSE</arg>
+<arg>FATAL ERROR</arg>
+<arg>User not able to Login!</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>Logged in successfully!</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210908 13:43:15.620" level="INFO">Logged in successfully!</msg>
+<status status="PASS" starttime="20210908 13:43:15.620" endtime="20210908 13:43:15.620"/>
+</kw>
+<status status="PASS" starttime="20210908 13:43:15.619" endtime="20210908 13:43:15.620"/>
+</kw>
+<status status="PASS" starttime="20210908 13:42:51.870" endtime="20210908 13:43:15.620"/>
+</kw>
+<status status="PASS" starttime="20210908 13:42:51.870" endtime="20210908 13:43:15.620"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${env}'=="dev2"</arg>
+<arg>loginWmio_dev2</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20210908 13:43:15.620" endtime="20210908 13:43:15.621"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${env}'=="dev3"</arg>
+<arg>loginWmio_dev3</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20210908 13:43:15.621" endtime="20210908 13:43:15.621"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${env}'=="int"</arg>
+<arg>loginWmio_int</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20210908 13:43:15.621" endtime="20210908 13:43:15.621"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${env}'=="stagblue"</arg>
+<arg>loginWmio_stagblue</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20210908 13:43:15.622" endtime="20210908 13:43:15.622"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${env}'=="staggreen"</arg>
+<arg>loginWmio_staggreen</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20210908 13:43:15.622" endtime="20210908 13:43:15.622"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${env}'=="preprodblue"</arg>
+<arg>loginWmio_preprodblue</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20210908 13:43:15.623" endtime="20210908 13:43:15.623"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${env}'=="preprodgreen"</arg>
+<arg>loginWmio_preprodgreen</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20210908 13:43:15.623" endtime="20210908 13:43:15.624"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${env}'=="prod"</arg>
+<arg>loginWmio_prod</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20210908 13:43:15.624" endtime="20210908 13:43:15.625"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${env}'=="spro"</arg>
+<arg>loginWmio_spro</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20210908 13:43:15.625" endtime="20210908 13:43:15.626"/>
+</kw>
+<status status="PASS" starttime="20210908 13:42:51.869" endtime="20210908 13:43:15.626"/>
+</kw>
+<kw name="selectProject" library="default_keywords">
+<arg>${projectToSelect}</arg>
+<doc>This keyword is used to select a project based on project name. Project name is case sensitive</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_commonSearchBox}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:15.628" endtime="20210908 13:43:15.643"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_commonSearchBox}</arg>
+<arg>${projNameToSearch}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:15.644" level="INFO">Typing text 'CS_Engine_UI_Automation' into text field 'xpath://input[@class='search-box-input']'.</msg>
+<status status="PASS" starttime="20210908 13:43:15.643" endtime="20210908 13:43:15.916"/>
+</kw>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>${PO_commonSearchBox}</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20210908 13:43:15.917" level="INFO">Sending key(s) ('RETURN',) to xpath://input[@class='search-box-input'] element.</msg>
+<msg timestamp="20210908 13:43:16.316" level="INFO">Pressing special key RETURN to element.</msg>
+<msg timestamp="20210908 13:43:16.316" level="INFO">Releasing special key RETURN.</msg>
+<status status="PASS" starttime="20210908 13:43:15.916" endtime="20210908 13:43:16.340"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:43:18.343" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20210908 13:43:16.342" endtime="20210908 13:43:18.343"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>xpath://span[@title='${projNameToSearch}']</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:18.343" endtime="20210908 13:43:18.357"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath://span[@title='${projNameToSearch}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:18.358" level="INFO">Clicking element 'xpath://span[@title='CS_Engine_UI_Automation']'.</msg>
+<status status="PASS" starttime="20210908 13:43:18.357" endtime="20210908 13:43:18.454"/>
+</kw>
+<status status="PASS" starttime="20210908 13:43:15.627" endtime="20210908 13:43:18.454"/>
+</kw>
+<kw name="SelectIntigrationTab" library="default_keywords">
+<doc>this keyword will select the intigration tab</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_IntigrationTab}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:18.460" endtime="20210908 13:43:19.355"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_IntigrationTab}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:19.357" level="INFO">Clicking element 'xpath://span[contains(text(),'Integrations')]'.</msg>
+<status status="PASS" starttime="20210908 13:43:19.356" endtime="20210908 13:43:19.442"/>
+</kw>
+<status status="PASS" starttime="20210908 13:43:18.459" endtime="20210908 13:43:19.443"/>
+</kw>
+<kw name="CreateNewFlowService" library="default_keywords">
+<doc>This keyword creates a new FlowService.</doc>
+<kw name="SelectFlowServicesTab" library="default_keywords">
+<doc>This keyword selects the FlowService tab after login</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_flowServicesTab}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:19.444" endtime="20210908 13:43:19.460"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:43:22.466" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20210908 13:43:19.460" endtime="20210908 13:43:22.467"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_flowServicesTab}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:22.468" level="INFO">Clicking element 'xpath://a[contains(text(),'FlowServices')]'.</msg>
+<status status="PASS" starttime="20210908 13:43:22.467" endtime="20210908 13:43:22.613"/>
+</kw>
+<status status="PASS" starttime="20210908 13:43:19.444" endtime="20210908 13:43:22.613"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${addFlowServiceButton}</var>
+<arg>wait until page contains element</arg>
+<arg>${PO_addFlowServiceCommonButton}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_addFlowServiceCommonButton}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:22.614" endtime="20210908 13:43:23.071"/>
+</kw>
+<msg timestamp="20210908 13:43:23.071" level="INFO">${addFlowServiceButton} = True</msg>
+<status status="PASS" starttime="20210908 13:43:22.614" endtime="20210908 13:43:23.071"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${addFlowServiceButton}'=='True'</arg>
+<arg>click element</arg>
+<arg>${PO_addFlowServiceCommonButton}</arg>
+<arg>ELSE</arg>
+<arg>FATAL ERROR</arg>
+<arg>Unable to create Flow service!</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_addFlowServiceCommonButton}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:23.072" level="INFO">Clicking element 'xpath://a[contains(@class,"delite-icon dlt-icon-plus")]'.</msg>
+<status status="PASS" starttime="20210908 13:43:23.072" endtime="20210908 13:43:23.163"/>
+</kw>
+<status status="PASS" starttime="20210908 13:43:23.071" endtime="20210908 13:43:23.163"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Start creating the FlowService</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:23.163" endtime="20210908 13:43:40.470"/>
+</kw>
+<status status="PASS" starttime="20210908 13:43:19.443" endtime="20210908 13:43:40.471"/>
+</kw>
+<kw name="SelectConnectorWithVersion" library="default_keywords">
+<arg>Workday</arg>
+<arg>workday_v34.0</arg>
+<doc>This page selects connector in the first step of new flow. Accepts connector name and version as arguments</doc>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${elementVisible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${PO_closeGuidedTour}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>${PO_closeGuidedTour}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20210908 13:43:40.511" level="INFO">Element 'xpath://button[@class="driver-close-btn"]' is displayed.</msg>
+<status status="PASS" starttime="20210908 13:43:40.476" endtime="20210908 13:43:40.512"/>
+</kw>
+<msg timestamp="20210908 13:43:40.512" level="INFO">${elementVisible} = True</msg>
+<status status="PASS" starttime="20210908 13:43:40.475" endtime="20210908 13:43:40.512"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${elementVisible}</arg>
+<arg>click element</arg>
+<arg>${PO_closeGuidedTour}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_closeGuidedTour}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:40.513" level="INFO">Clicking element 'xpath://button[@class="driver-close-btn"]'.</msg>
+<status status="PASS" starttime="20210908 13:43:40.513" endtime="20210908 13:43:40.645"/>
+</kw>
+<status status="PASS" starttime="20210908 13:43:40.512" endtime="20210908 13:43:40.645"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_inputFirstFlowStep}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:40.645" endtime="20210908 13:43:40.659"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:43:43.670" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20210908 13:43:40.659" endtime="20210908 13:43:43.670"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_inputFirstFlowStep}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:43.671" level="INFO">Clicking element 'xpath://input[@id='first-flow-step']'.</msg>
+<status status="PASS" starttime="20210908 13:43:43.670" endtime="20210908 13:43:43.798"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:43:45.808" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20210908 13:43:43.798" endtime="20210908 13:43:45.808"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_allFunctions}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:45.808" level="INFO">Clicking element 'xpath://span[contains(text(),'ALL')]'.</msg>
+<status status="PASS" starttime="20210908 13:43:45.808" endtime="20210908 13:43:45.895"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_apps}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:45.895" level="INFO">Clicking element 'xpath://div[@id='APPS']'.</msg>
+<status status="PASS" starttime="20210908 13:43:45.895" endtime="20210908 13:43:46.347"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_stepInputBox}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:46.348" level="INFO">Clicking element 'xpath://div[@id='filter-section']//input'.</msg>
+<status status="PASS" starttime="20210908 13:43:46.348" endtime="20210908 13:43:46.744"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_stepInputBox}</arg>
+<arg>${connectorName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:46.744" level="INFO">Typing text 'Workday' into text field 'xpath://div[@id='filter-section']//input'.</msg>
+<status status="PASS" starttime="20210908 13:43:46.744" endtime="20210908 13:43:47.008"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>xpath://i[@class='com.softwareag.cloudstreams.${connectorNameWithVersion} connector-icon']</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:47.008" endtime="20210908 13:43:47.024"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath://i[@class='com.softwareag.cloudstreams.${connectorNameWithVersion} connector-icon']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:47.025" level="INFO">Clicking element 'xpath://i[@class='com.softwareag.cloudstreams.workday_v34.0 connector-icon']'.</msg>
+<status status="PASS" starttime="20210908 13:43:47.024" endtime="20210908 13:43:47.163"/>
+</kw>
+<status status="PASS" starttime="20210908 13:43:40.474" endtime="20210908 13:43:47.163"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:43:52.174" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20210908 13:43:47.165" endtime="20210908 13:43:52.174"/>
+</kw>
+<kw name="addCustomOperation_Account_WorkdayV34" library="workday_keywords">
+<arg>CustOp_putCompanyInsiderType</arg>
+<arg>Human Resources</arg>
+<doc>To add Account in creating custom operation of Workday v34</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_connectorDropdown}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:52.177" endtime="20210908 13:43:52.191"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_connectorDropdown}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:52.192" level="INFO">Clicking element 'xpath://input[@id='step-dropdown-input']'.</msg>
+<status status="PASS" starttime="20210908 13:43:52.191" endtime="20210908 13:43:52.305"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_addCustomOperation}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:52.305" endtime="20210908 13:43:52.762"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_addCustomOperation}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:52.763" level="INFO">Clicking element 'xpath://span[@class="custom-action-label"]'.</msg>
+<status status="PASS" starttime="20210908 13:43:52.762" endtime="20210908 13:43:52.900"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_addNewAccountIcon}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:52.900" endtime="20210908 13:43:53.856"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_addNewAccountIcon}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:53.856" level="INFO">Clicking element 'xpath://span[@class='material-icons']'.</msg>
+<status status="PASS" starttime="20210908 13:43:53.856" endtime="20210908 13:43:54.758"/>
+</kw>
+<kw name="addAccount_WorkdayV34" library="workday_keywords">
+<doc>To create an account for Workday V34</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_connectionAccountName}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:54.759" endtime="20210908 13:43:54.780"/>
+</kw>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>${PO_connectionAccountName}</arg>
+<arg>CTRL+a+DELETE</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20210908 13:43:54.781" level="INFO">Sending key(s) ('CTRL+a+DELETE',) to xpath://input[translate(@aid,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='account name'] element.</msg>
+<msg timestamp="20210908 13:43:55.124" level="INFO">Pressing special key CONTROL down.</msg>
+<msg timestamp="20210908 13:43:55.124" level="INFO">Sending key a</msg>
+<msg timestamp="20210908 13:43:55.124" level="INFO">Pressing special key DELETE down.</msg>
+<msg timestamp="20210908 13:43:55.124" level="INFO">Releasing special key CONTROL.</msg>
+<msg timestamp="20210908 13:43:55.124" level="INFO">Releasing special key DELETE.</msg>
+<status status="PASS" starttime="20210908 13:43:54.780" endtime="20210908 13:43:55.232"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_connectionAccountName}</arg>
+<arg>${newCommonAccountName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:55.233" level="INFO">Typing text 'Auto_1' into text field 'xpath://input[translate(@aid,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='account name']'.</msg>
+<status status="PASS" starttime="20210908 13:43:55.233" endtime="20210908 13:43:55.540"/>
+</kw>
+<kw name="getDataFromDB" library="default_keywords">
+<var>${workdayserverurl}</var>
+<arg>Con14.serverURL</arg>
+<doc>This Keyword fetches entries from db.</doc>
+<kw name="Get Entries By Username" library="KeePassLibrary">
+<var>${entry}</var>
+<arg>${key}</arg>
+<arg>first=True</arg>
+<doc>Return a list of entries in the open KeePass database matching the given ``username``.</doc>
+<msg timestamp="20210908 13:43:55.544" level="INFO">${entry} = Entry: "Con14 (Con14.serverURL)"</msg>
+<status status="PASS" starttime="20210908 13:43:55.541" endtime="20210908 13:43:55.544"/>
+</kw>
+<kw name="Get Entry Password" library="KeePassLibrary">
+<var>${value}</var>
+<arg>${entry}</arg>
+<doc>Return the password value of the supplied KeePass ``entry``</doc>
+<msg timestamp="20210908 13:43:55.545" level="INFO">${value} = https://wd2-impl-services1.workday.com/ccx/service/softwareag_pt1</msg>
+<status status="PASS" starttime="20210908 13:43:55.544" endtime="20210908 13:43:55.545"/>
+</kw>
+<kw name="Return From Keyword" library="BuiltIn">
+<arg>${value}</arg>
+<doc>Returns from the enclosing user keyword.</doc>
+<msg timestamp="20210908 13:43:55.545" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20210908 13:43:55.545" endtime="20210908 13:43:55.546"/>
+</kw>
+<msg timestamp="20210908 13:43:55.546" level="INFO">${workdayserverurl} = https://wd2-impl-services1.workday.com/ccx/service/softwareag_pt1</msg>
+<status status="PASS" starttime="20210908 13:43:55.540" endtime="20210908 13:43:55.546"/>
+</kw>
+<kw name="getDataFromDB" library="default_keywords">
+<var>${workdayusername}</var>
+<arg>Con14.username</arg>
+<doc>This Keyword fetches entries from db.</doc>
+<kw name="Get Entries By Username" library="KeePassLibrary">
+<var>${entry}</var>
+<arg>${key}</arg>
+<arg>first=True</arg>
+<doc>Return a list of entries in the open KeePass database matching the given ``username``.</doc>
+<msg timestamp="20210908 13:43:55.549" level="INFO">${entry} = Entry: "Con14 (Con14.username)"</msg>
+<status status="PASS" starttime="20210908 13:43:55.546" endtime="20210908 13:43:55.549"/>
+</kw>
+<kw name="Get Entry Password" library="KeePassLibrary">
+<var>${value}</var>
+<arg>${entry}</arg>
+<doc>Return the password value of the supplied KeePass ``entry``</doc>
+<msg timestamp="20210908 13:43:55.550" level="INFO">${value} = wstuser@softwareag_pt1</msg>
+<status status="PASS" starttime="20210908 13:43:55.550" endtime="20210908 13:43:55.550"/>
+</kw>
+<kw name="Return From Keyword" library="BuiltIn">
+<arg>${value}</arg>
+<doc>Returns from the enclosing user keyword.</doc>
+<msg timestamp="20210908 13:43:55.550" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20210908 13:43:55.550" endtime="20210908 13:43:55.551"/>
+</kw>
+<msg timestamp="20210908 13:43:55.551" level="INFO">${workdayusername} = wstuser@softwareag_pt1</msg>
+<status status="PASS" starttime="20210908 13:43:55.546" endtime="20210908 13:43:55.551"/>
+</kw>
+<kw name="getDataFromDB" library="default_keywords">
+<var>${workdaypassword}</var>
+<arg>Con14.password</arg>
+<doc>This Keyword fetches entries from db.</doc>
+<kw name="Get Entries By Username" library="KeePassLibrary">
+<var>${entry}</var>
+<arg>${key}</arg>
+<arg>first=True</arg>
+<doc>Return a list of entries in the open KeePass database matching the given ``username``.</doc>
+<msg timestamp="20210908 13:43:55.555" level="INFO">${entry} = Entry: "Con14 (Con14.password)"</msg>
+<status status="PASS" starttime="20210908 13:43:55.551" endtime="20210908 13:43:55.555"/>
+</kw>
+<kw name="Get Entry Password" library="KeePassLibrary">
+<var>${value}</var>
+<arg>${entry}</arg>
+<doc>Return the password value of the supplied KeePass ``entry``</doc>
+<msg timestamp="20210908 13:43:55.555" level="INFO">${value} = M@nage@4321SAG</msg>
+<status status="PASS" starttime="20210908 13:43:55.555" endtime="20210908 13:43:55.555"/>
+</kw>
+<kw name="Return From Keyword" library="BuiltIn">
+<arg>${value}</arg>
+<doc>Returns from the enclosing user keyword.</doc>
+<msg timestamp="20210908 13:43:55.556" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20210908 13:43:55.555" endtime="20210908 13:43:55.557"/>
+</kw>
+<msg timestamp="20210908 13:43:55.557" level="INFO">${workdaypassword} = M@nage@4321SAG</msg>
+<status status="PASS" starttime="20210908 13:43:55.551" endtime="20210908 13:43:55.557"/>
+</kw>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>${PO_serverUrl}</arg>
+<arg>CTRL+a+DELETE</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20210908 13:43:55.558" level="INFO">Sending key(s) ('CTRL+a+DELETE',) to xpath://input[@name='Server URL'] element.</msg>
+<msg timestamp="20210908 13:43:55.875" level="INFO">Pressing special key CONTROL down.</msg>
+<msg timestamp="20210908 13:43:55.875" level="INFO">Sending key a</msg>
+<msg timestamp="20210908 13:43:55.876" level="INFO">Pressing special key DELETE down.</msg>
+<msg timestamp="20210908 13:43:55.876" level="INFO">Releasing special key CONTROL.</msg>
+<msg timestamp="20210908 13:43:55.876" level="INFO">Releasing special key DELETE.</msg>
+<status status="PASS" starttime="20210908 13:43:55.558" endtime="20210908 13:43:56.009"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_serverUrl}</arg>
+<arg>${workdayserverurl}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:56.009" level="INFO">Typing text 'https://wd2-impl-services1.workday.com/ccx/service/softwareag_pt1' into text field 'xpath://input[@name='Server URL']'.</msg>
+<status status="PASS" starttime="20210908 13:43:56.009" endtime="20210908 13:43:57.675"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_addAccountUserName}</arg>
+<arg>${workdayusername}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:57.676" level="INFO">Typing text 'wstuser@softwareag_pt1' into text field 'xpath://input[@name='Username']'.</msg>
+<status status="PASS" starttime="20210908 13:43:57.675" endtime="20210908 13:43:58.369"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_addAccountPassword}</arg>
+<arg>${workdaypassword}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:58.370" level="INFO">Typing text 'M@nage@4321SAG' into text field 'xpath://input[@name='Password']'.</msg>
+<status status="PASS" starttime="20210908 13:43:58.369" endtime="20210908 13:43:58.870"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_addButton}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:43:58.871" level="INFO">Clicking element 'xpath://button[contains(text(),'Add')]'.</msg>
+<status status="PASS" starttime="20210908 13:43:58.871" endtime="20210908 13:43:58.962"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>successfully</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:43:58.963" endtime="20210908 13:44:13.332"/>
+</kw>
+<status status="PASS" starttime="20210908 13:43:54.759" endtime="20210908 13:44:13.332"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_customActionName}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:13.332" endtime="20210908 13:44:13.347"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_customActionName}</arg>
+<arg>${customOperationName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:13.348" level="INFO">Typing text 'CustOp_putCompanyInsiderType' into text field 'xpath://input[@name='Name']'.</msg>
+<status status="PASS" starttime="20210908 13:44:13.348" endtime="20210908 13:44:14.020"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:44:19.030" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20210908 13:44:14.020" endtime="20210908 13:44:19.030"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_functionalAreaDropdown}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:19.030" endtime="20210908 13:44:19.048"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_functionalAreaDropdown}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:19.049" level="INFO">Clicking element 'xpath://input[@value='Select Value']'.</msg>
+<status status="PASS" starttime="20210908 13:44:19.049" endtime="20210908 13:44:19.166"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath://div[contains(text(),'${functionalArea}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:19.166" level="INFO">Clicking element 'xpath://div[contains(text(),'Human Resources')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:19.166" endtime="20210908 13:44:19.260"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_next_button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:19.261" endtime="20210908 13:44:19.276"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_next_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:19.277" level="INFO">Clicking element 'xpath://button[contains(text(),'Next')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:19.277" endtime="20210908 13:44:19.391"/>
+</kw>
+<status status="PASS" starttime="20210908 13:43:52.176" endtime="20210908 13:44:19.391"/>
+</kw>
+<kw name="addCustOpforputCompanyInsiderType" library="workday_keywords">
+<arg>Put_Company_Insider_Type</arg>
+<doc>To Select the Operation and Business objects in creating Custom operation of workday v34</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_searchAction}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:19.397" endtime="20210908 13:44:34.833"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_searchAction}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:34.834" level="INFO">Clicking element 'xpath://input[@placeholder='Search for action']'.</msg>
+<status status="PASS" starttime="20210908 13:44:34.834" endtime="20210908 13:44:34.989"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_searchAction}</arg>
+<arg>${actionName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:34.990" level="INFO">Typing text 'Put_Company_Insider_Type' into text field 'xpath://input[@placeholder='Search for action']'.</msg>
+<status status="PASS" starttime="20210908 13:44:34.990" endtime="20210908 13:44:35.706"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_putcompanyinsidertypeactionRadioBtnInAddCustomOperationPage}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:35.707" level="INFO">Clicking element 'xpath://span[contains(text(),'Put_Company_Insider_Type')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:35.706" endtime="20210908 13:44:35.813"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_next_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:35.814" level="INFO">Clicking element 'xpath://button[contains(text(),'Next')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:35.814" endtime="20210908 13:44:35.900"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_done_button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:35.900" endtime="20210908 13:44:35.915"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_done_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:35.916" level="INFO">Clicking element 'xpath://button[contains(text(),'Done')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:35.915" endtime="20210908 13:44:36.081"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:44:41.096" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20210908 13:44:36.081" endtime="20210908 13:44:41.096"/>
+</kw>
+<status status="PASS" starttime="20210908 13:44:19.396" endtime="20210908 13:44:41.097"/>
+</kw>
+<kw name="configurePutCompanyInsiderTypePipelineOfWorkdayv34" library="workday_keywords">
+<arg>2136.5</arg>
+<arg>SAG</arg>
+<arg>PutCompany</arg>
+<arg>0</arg>
+<doc>To configure the createAccunt for workdayv34 in pipeline.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_editMapping}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:41.100" endtime="20210908 13:44:44.639"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_editMapping}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:44.641" level="INFO">Clicking element 'xpath://*[@class='float-right step-action-icon ut-edit-pipeline-icon ut-pipeline ng-star-inserted']'.</msg>
+<status status="PASS" starttime="20210908 13:44:44.640" endtime="20210908 13:44:45.000"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:45.000" endtime="20210908 13:44:45.259"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:45.259" level="INFO">Clicking element 'xpath://*[@id="SI-flow-tree"]/flow-tree/div/div/div[1]/span/i'.</msg>
+<status status="PASS" starttime="20210908 13:44:45.259" endtime="20210908 13:44:45.506"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:45.506" endtime="20210908 13:44:45.535"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:45.536" level="INFO">Clicking element 'xpath://*[@id="SI-flow-tree"]/flow-tree/div/div/div[5]/div[1]/span/i'.</msg>
+<status status="PASS" starttime="20210908 13:44:45.535" endtime="20210908 13:44:45.654"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:45.655" endtime="20210908 13:44:45.677"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:45.677" level="INFO">Clicking element 'xpath://*[@id="SI-flow-tree"]/flow-tree/div/div/div[5]/div[4]/div[1]/span/i'.</msg>
+<status status="PASS" starttime="20210908 13:44:45.677" endtime="20210908 13:44:45.796"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C2InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:45.796" endtime="20210908 13:44:46.262"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C2InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:46.263" level="INFO">Clicking element 'xpath://*[@id="SI-flow-tree"]/flow-tree/div/div/div[5]/div[4]/div[7]/div[1]/span/i'.</msg>
+<status status="PASS" starttime="20210908 13:44:46.263" endtime="20210908 13:44:46.398"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_CompanyInsiderTypeIDinPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:46.399" endtime="20210908 13:44:46.866"/>
+</kw>
+<kw name="Double Click Element" library="SeleniumLibrary">
+<arg>${PO_CompanyInsiderTypeIDinPipeline}</arg>
+<doc>Double clicks the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:46.867" level="INFO">Double clicking element 'xpath://span[contains(text(),'wd:Company_Insider_Type_ID')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:46.867" endtime="20210908 13:44:47.442"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_textFieldInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:47.443" endtime="20210908 13:44:47.462"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_textFieldInPipeline}</arg>
+<arg>${CompanyInsiderTypeID}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:47.465" level="INFO">Typing text '2136.5' into text field 'xpath://input[@placeholder='Enter value here']'.</msg>
+<status status="PASS" starttime="20210908 13:44:47.463" endtime="20210908 13:44:47.829"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_saveButtonInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:47.830" endtime="20210908 13:44:47.860"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${PO_saveButtonInPipeline}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:47.861" level="INFO">Clicking button 'xpath://button[contains(text(),'Save')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:47.861" endtime="20210908 13:44:47.982"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_CompanyInsiderTypeNameInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:47.983" endtime="20210908 13:44:48.004"/>
+</kw>
+<kw name="Double Click Element" library="SeleniumLibrary">
+<arg>${PO_CompanyInsiderTypeNameInPipeline}</arg>
+<doc>Double clicks the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:48.004" level="INFO">Double clicking element 'xpath://span[contains(text(),'wd:Company_Insider_Type_Name')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:48.004" endtime="20210908 13:44:48.503"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_textFieldInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:48.503" endtime="20210908 13:44:48.518"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_textFieldInPipeline}</arg>
+<arg>${CompanyInsiderTypeName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:48.519" level="INFO">Typing text 'SAG' into text field 'xpath://input[@placeholder='Enter value here']'.</msg>
+<status status="PASS" starttime="20210908 13:44:48.518" endtime="20210908 13:44:48.840"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_saveButtonInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:48.841" endtime="20210908 13:44:48.849"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${PO_saveButtonInPipeline}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:48.850" level="INFO">Clicking button 'xpath://button[contains(text(),'Save')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:48.850" endtime="20210908 13:44:48.962"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_CompanyInsiderTypeDescriptionInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:48.962" endtime="20210908 13:44:49.020"/>
+</kw>
+<kw name="Double Click Element" library="SeleniumLibrary">
+<arg>${PO_CompanyInsiderTypeDescriptionInPipeline}</arg>
+<doc>Double clicks the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:49.021" level="INFO">Double clicking element 'xpath://span[contains(text(),'wd:Company_Insider_Type_Description')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:49.020" endtime="20210908 13:44:49.507"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_textFieldInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:49.508" endtime="20210908 13:44:49.521"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_textFieldInPipeline}</arg>
+<arg>${CompanyInsiderTypeDescription}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:49.522" level="INFO">Typing text 'PutCompany' into text field 'xpath://input[@placeholder='Enter value here']'.</msg>
+<status status="PASS" starttime="20210908 13:44:49.521" endtime="20210908 13:44:49.989"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_saveButtonInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:49.989" endtime="20210908 13:44:50.001"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${PO_saveButtonInPipeline}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:50.002" level="INFO">Clicking button 'xpath://button[contains(text(),'Save')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:50.002" endtime="20210908 13:44:50.118"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_CompanyInsiderTypeInactiveInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:50.118" endtime="20210908 13:44:50.136"/>
+</kw>
+<kw name="Double Click Element" library="SeleniumLibrary">
+<arg>${PO_CompanyInsiderTypeInactiveInPipeline}</arg>
+<doc>Double clicks the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:50.136" level="INFO">Double clicking element 'xpath://span[contains(text(),'wd:Inactive')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:50.136" endtime="20210908 13:44:50.606"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_textFieldInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:50.607" endtime="20210908 13:44:50.623"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_textFieldInPipeline}</arg>
+<arg>${CompanyInsiderTypeInactiveValue}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:50.624" level="INFO">Typing text '0' into text field 'xpath://input[@placeholder='Enter value here']'.</msg>
+<status status="PASS" starttime="20210908 13:44:50.623" endtime="20210908 13:44:50.801"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_saveButtonInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:50.802" endtime="20210908 13:44:50.812"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${PO_saveButtonInPipeline}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:50.813" level="INFO">Clicking button 'xpath://button[contains(text(),'Save')]'.</msg>
+<status status="PASS" starttime="20210908 13:44:50.813" endtime="20210908 13:44:50.929"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:44:53.933" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20210908 13:44:50.929" endtime="20210908 13:44:53.933"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_closePipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:53.934" endtime="20210908 13:44:53.949"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_closePipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:53.950" level="INFO">Clicking element 'xpath://a[@title='Close pipeline view']'.</msg>
+<status status="PASS" starttime="20210908 13:44:53.949" endtime="20210908 13:44:54.075"/>
+</kw>
+<status status="PASS" starttime="20210908 13:44:41.098" endtime="20210908 13:44:54.076"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:44:59.090" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20210908 13:44:54.077" endtime="20210908 13:44:59.090"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_addNewStep}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:44:59.093" level="INFO">Clicking element 'xpath://a[@title='Add new step']'.</msg>
+<status status="PASS" starttime="20210908 13:44:59.092" endtime="20210908 13:44:59.292"/>
+</kw>
+<kw name="SelectConnectorWithVersionInSteps" library="default_keywords">
+<arg>Workday</arg>
+<arg>workday_v34.0</arg>
+<arg>2</arg>
+<doc>This page selects connector in the second step of new flow. Accepts connector name and version as arguments</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_flowServiceInSteps}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:44:59.296" endtime="20210908 13:44:59.316"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:45:02.327" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20210908 13:44:59.316" endtime="20210908 13:45:02.327"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_flowServiceInSteps}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:02.329" level="INFO">Clicking element 'xpath://input[@placeholder='Type or browse to choose the step']'.</msg>
+<status status="PASS" starttime="20210908 13:45:02.328" endtime="20210908 13:45:02.508"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:45:04.524" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20210908 13:45:02.509" endtime="20210908 13:45:04.524"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_allFunctions}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:04.525" level="INFO">Clicking element 'xpath://span[contains(text(),'ALL')]'.</msg>
+<status status="PASS" starttime="20210908 13:45:04.524" endtime="20210908 13:45:04.600"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_apps}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:04.601" level="INFO">Clicking element 'xpath://div[@id='APPS']'.</msg>
+<status status="PASS" starttime="20210908 13:45:04.600" endtime="20210908 13:45:05.117"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_stepInputBox}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:05.118" level="INFO">Clicking element 'xpath://div[@id='filter-section']//input'.</msg>
+<status status="PASS" starttime="20210908 13:45:05.117" endtime="20210908 13:45:05.235"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_stepInputBox}</arg>
+<arg>${connectorName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:05.236" level="INFO">Typing text 'Workday' into text field 'xpath://div[@id='filter-section']//input'.</msg>
+<status status="PASS" starttime="20210908 13:45:05.235" endtime="20210908 13:45:05.423"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>xpath:(//i[@class='com.softwareag.cloudstreams.${connectorNameWithVersion} connector-icon'])[${flowstepnumber}]</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:05.423" endtime="20210908 13:45:05.437"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath:(//i[@class='com.softwareag.cloudstreams.${connectorNameWithVersion} connector-icon'])[${flowstepnumber}]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:05.438" level="INFO">Clicking element 'xpath:(//i[@class='com.softwareag.cloudstreams.workday_v34.0 connector-icon'])[2]'.</msg>
+<status status="PASS" starttime="20210908 13:45:05.437" endtime="20210908 13:45:05.571"/>
+</kw>
+<status status="PASS" starttime="20210908 13:44:59.294" endtime="20210908 13:45:05.571"/>
+</kw>
+<kw name="addCustomOPwithExistingAccount" library="coupaV28_keywords">
+<arg>CustOp_getCompanyInsiderType</arg>
+<arg>Human Resources</arg>
+<doc>To add customop with existing account</doc>
+<kw name="navigateToAddCustomOperationPage" library="default_keywords">
+<doc>This function will navigate you to add custom operation page from flow service page</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_actionSelectionDropdown}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:05.573" endtime="20210908 13:45:05.589"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_actionSelectionDropdown}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:05.590" level="INFO">Clicking element 'xpath://*[@class='isStepActive']//input[@placeholder='Type to choose action']'.</msg>
+<status status="PASS" starttime="20210908 13:45:05.589" endtime="20210908 13:45:05.674"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_addCustomOperation}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:05.675" endtime="20210908 13:45:06.121"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_addCustomOperation}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:06.122" level="INFO">Clicking element 'xpath://span[@class="custom-action-label"]'.</msg>
+<status status="PASS" starttime="20210908 13:45:06.122" endtime="20210908 13:45:06.219"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_connectToAccountLabel}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:06.220" endtime="20210908 13:45:07.360"/>
+</kw>
+<status status="PASS" starttime="20210908 13:45:05.572" endtime="20210908 13:45:07.361"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_accountSelectionDropdownInAddCustomOperationPage}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:07.361" endtime="20210908 13:45:07.387"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_accountSelectionDropdownInAddCustomOperationPage}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:07.388" level="INFO">Clicking element 'xpath://input[starts-with(@aid,'Connect to')]'.</msg>
+<status status="PASS" starttime="20210908 13:45:07.387" endtime="20210908 13:45:07.481"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:45:09.494" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20210908 13:45:07.482" endtime="20210908 13:45:09.494"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//*[text()='${newCommonAccountName}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:09.495" level="INFO">Clicking element '//*[text()='Auto_1']'.</msg>
+<status status="PASS" starttime="20210908 13:45:09.495" endtime="20210908 13:45:09.608"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_customActionName}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:09.609" endtime="20210908 13:45:09.623"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_customActionName}</arg>
+<arg>${customOperationName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:09.623" level="INFO">Typing text 'CustOp_getCompanyInsiderType' into text field 'xpath://input[@name='Name']'.</msg>
+<status status="PASS" starttime="20210908 13:45:09.623" endtime="20210908 13:45:10.254"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:45:15.257" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20210908 13:45:10.255" endtime="20210908 13:45:15.257"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_functionalAreaDropdown}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:15.258" endtime="20210908 13:45:15.282"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_functionalAreaDropdown}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:15.283" level="INFO">Clicking element 'xpath://input[@value='Select Value']'.</msg>
+<status status="PASS" starttime="20210908 13:45:15.282" endtime="20210908 13:45:15.420"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath://div[contains(text(),'${functionalArea}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:15.421" level="INFO">Clicking element 'xpath://div[contains(text(),'Human Resources')]'.</msg>
+<status status="PASS" starttime="20210908 13:45:15.420" endtime="20210908 13:45:15.496"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_next_button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:15.497" endtime="20210908 13:45:15.513"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_next_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:15.513" level="INFO">Clicking element 'xpath://button[contains(text(),'Next')]'.</msg>
+<status status="PASS" starttime="20210908 13:45:15.513" endtime="20210908 13:45:15.595"/>
+</kw>
+<status status="PASS" starttime="20210908 13:45:05.572" endtime="20210908 13:45:15.595"/>
+</kw>
+<kw name="addCustOpforgetCompanyInsiderType" library="workday_keywords">
+<arg>Get_Company_Insider_Type</arg>
+<doc>To Select the Operation and Business objects in creating Custom operation of workday v34</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_searchAction}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:15.597" endtime="20210908 13:45:17.980"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_searchAction}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:17.981" level="INFO">Clicking element 'xpath://input[@placeholder='Search for action']'.</msg>
+<status status="PASS" starttime="20210908 13:45:17.980" endtime="20210908 13:45:18.085"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_searchAction}</arg>
+<arg>${actionName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:18.086" level="INFO">Typing text 'Get_Company_Insider_Type' into text field 'xpath://input[@placeholder='Search for action']'.</msg>
+<status status="PASS" starttime="20210908 13:45:18.085" endtime="20210908 13:45:18.851"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_getcompanyinsidertypeactionRadioBtnInAddCustomOperationPage}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:18.852" level="INFO">Clicking element 'xpath://span[@class='radio-btn-label-text'][contains(text(),'Get_Company_Insider_Types')]'.</msg>
+<status status="PASS" starttime="20210908 13:45:18.851" endtime="20210908 13:45:18.954"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_next_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:18.956" level="INFO">Clicking element 'xpath://button[contains(text(),'Next')]'.</msg>
+<status status="PASS" starttime="20210908 13:45:18.955" endtime="20210908 13:45:19.030"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_done_button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:19.030" endtime="20210908 13:45:19.045"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_done_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:19.046" level="INFO">Clicking element 'xpath://button[contains(text(),'Done')]'.</msg>
+<status status="PASS" starttime="20210908 13:45:19.046" endtime="20210908 13:45:19.186"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:45:24.197" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20210908 13:45:19.187" endtime="20210908 13:45:24.197"/>
+</kw>
+<status status="PASS" starttime="20210908 13:45:15.596" endtime="20210908 13:45:24.198"/>
+</kw>
+<kw name="configureGetCompanyInsiderTypePipelineOfWorkdayv34" library="workday_keywords">
+<arg>2</arg>
+<doc>To configure the GetCompanyInsiderType for workdayv34 in pipeline.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>xpath://step-ui/div/div/step-ui[${flowserviceStepNumber}]//span[@title='Edit Mapping']</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:24.199" endtime="20210908 13:45:25.525"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath://step-ui/div/div/step-ui[${flowserviceStepNumber}]//span[@title='Edit Mapping']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:25.527" level="INFO">Clicking element 'xpath://step-ui/div/div/step-ui[2]//span[@title='Edit Mapping']'.</msg>
+<status status="PASS" starttime="20210908 13:45:25.526" endtime="20210908 13:45:25.836"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:25.837" endtime="20210908 13:45:26.306"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:26.307" level="INFO">Clicking element 'xpath://*[@id="SI-flow-tree"]/flow-tree/div/div/div[1]/span/i'.</msg>
+<status status="PASS" starttime="20210908 13:45:26.307" endtime="20210908 13:45:26.449"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:26.449" endtime="20210908 13:45:26.473"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:26.474" level="INFO">Clicking element 'xpath://*[@id="SI-flow-tree"]/flow-tree/div/div/div[5]/div[1]/span/i'.</msg>
+<status status="PASS" starttime="20210908 13:45:26.474" endtime="20210908 13:45:26.604"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:26.604" endtime="20210908 13:45:26.619"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:26.619" level="INFO">Clicking element 'xpath://*[@id="SI-flow-tree"]/flow-tree/div/div/div[5]/div[4]/div[1]/span/i'.</msg>
+<status status="PASS" starttime="20210908 13:45:26.619" endtime="20210908 13:45:26.746"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C1InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:26.746" endtime="20210908 13:45:26.768"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C1InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:26.769" level="INFO">Clicking element 'xpath://*[@id="SI-flow-tree"]/flow-tree/div/div/div[5]/div[4]/div[5]/div[1]/span/i'.</msg>
+<status status="PASS" starttime="20210908 13:45:26.769" endtime="20210908 13:45:26.915"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C1C1InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:26.915" endtime="20210908 13:45:27.380"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C1C1InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:27.380" level="INFO">Clicking element 'xpath://*[@id="SI-flow-tree"]/flow-tree/div/div/div[5]/div[4]/div[5]/div[4]/div[1]/span/i'.</msg>
+<status status="PASS" starttime="20210908 13:45:27.380" endtime="20210908 13:45:27.509"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C1C1C1InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:27.509" endtime="20210908 13:45:27.975"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C1C1C1InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:27.976" level="INFO">Clicking element 'xpath://*[@id="SI-flow-tree"]/flow-tree/div/div/div[5]/div[4]/div[5]/div[4]/div[5]/div[1]/span/i'.</msg>
+<status status="PASS" starttime="20210908 13:45:27.975" endtime="20210908 13:45:28.128"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:28.129" endtime="20210908 13:45:28.143"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:28.144" level="INFO">Clicking element 'xpath://*[@id="PI-flow-tree"]/flow-tree/div/div[2]/div[1]/span/i'.</msg>
+<status status="PASS" starttime="20210908 13:45:28.144" endtime="20210908 13:45:28.303"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1WorkdayInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:28.303" endtime="20210908 13:45:28.319"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1WorkdayInPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:28.320" level="INFO">Clicking element 'xpath://*[@id="PI-flow-tree"]/flow-tree/div/div[2]/div[6]/div[1]/span'.</msg>
+<status status="PASS" starttime="20210908 13:45:28.320" endtime="20210908 13:45:28.450"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1C1WorkdayInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:28.451" endtime="20210908 13:45:28.491"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1C1WorkdayInPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:28.492" level="INFO">Clicking element 'xpath://*[@id="PI-flow-tree"]/flow-tree/div/div[2]/div[6]/div[4]/div[1]/span'.</msg>
+<status status="PASS" starttime="20210908 13:45:28.491" endtime="20210908 13:45:28.614"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1C1C1WorkdayInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:28.615" endtime="20210908 13:45:29.081"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1C1C1WorkdayInPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:29.081" level="INFO">Clicking element 'xpath://*[@id="PI-flow-tree"]/flow-tree/div/div[2]/div[6]/div[4]/div[5]/div[1]/span'.</msg>
+<status status="PASS" starttime="20210908 13:45:29.081" endtime="20210908 13:45:29.210"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1C1C1C1WorkdayInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:29.210" endtime="20210908 13:45:29.657"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1C1C1C1WorkdayInPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:29.657" level="INFO">Clicking element 'xpath://*[@id="PI-flow-tree"]/flow-tree/div/div[2]/div[6]/div[4]/div[5]/div[5]/div[1]/span/i'.</msg>
+<status status="PASS" starttime="20210908 13:45:29.657" endtime="20210908 13:45:29.794"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:45:32.810" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20210908 13:45:29.794" endtime="20210908 13:45:32.810"/>
+</kw>
+<kw name="Drag And Drop" library="SeleniumLibrary">
+<arg>${PO_expandCol1wdtypeWorkdayInPipeline}</arg>
+<arg>${PO_expandCol2wdtypeWorkdayInPipeline}</arg>
+<doc>Drags the element identified by ``locator`` into the ``target`` element.</doc>
+<status status="PASS" starttime="20210908 13:45:32.810" endtime="20210908 13:45:33.687"/>
+</kw>
+<kw name="Drag And Drop" library="SeleniumLibrary">
+<arg>${PO_expandCol1bodyWorkdayInPipeline}</arg>
+<arg>${PO_expandCol2bodyWorkdayInPipeline}</arg>
+<doc>Drags the element identified by ``locator`` into the ``target`` element.</doc>
+<status status="PASS" starttime="20210908 13:45:33.689" endtime="20210908 13:45:34.569"/>
+</kw>
+<kw name="Drag And Drop" library="SeleniumLibrary">
+<arg>${PO_expandCol1doctypeWorkdayInPipeline}</arg>
+<arg>${PO_expandCol2doctypeWorkdayInPipeline}</arg>
+<doc>Drags the element identified by ``locator`` into the ``target`` element.</doc>
+<status status="PASS" starttime="20210908 13:45:34.570" endtime="20210908 13:45:35.409"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:45:38.415" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20210908 13:45:35.410" endtime="20210908 13:45:38.415"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_closePipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:38.415" endtime="20210908 13:45:38.437"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_closePipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:38.438" level="INFO">Clicking element 'xpath://a[@title='Close pipeline view']'.</msg>
+<status status="PASS" starttime="20210908 13:45:38.437" endtime="20210908 13:45:38.594"/>
+</kw>
+<status status="PASS" starttime="20210908 13:45:24.198" endtime="20210908 13:45:38.594"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:45:43.604" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20210908 13:45:38.595" endtime="20210908 13:45:43.605"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_addNewStep}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:43.607" level="INFO">Clicking element 'xpath://a[@title='Add new step']'.</msg>
+<status status="PASS" starttime="20210908 13:45:43.606" endtime="20210908 13:45:43.755"/>
+</kw>
+<kw name="SelectConnectorWithVersionInSteps" library="default_keywords">
+<arg>Workday</arg>
+<arg>workday_v34.0</arg>
+<arg>3</arg>
+<doc>This page selects connector in the second step of new flow. Accepts connector name and version as arguments</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_flowServiceInSteps}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:43.759" endtime="20210908 13:45:43.777"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:45:46.787" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20210908 13:45:43.778" endtime="20210908 13:45:46.787"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_flowServiceInSteps}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:46.788" level="INFO">Clicking element 'xpath://input[@placeholder='Type or browse to choose the step']'.</msg>
+<status status="PASS" starttime="20210908 13:45:46.788" endtime="20210908 13:45:46.931"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:45:48.934" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20210908 13:45:46.931" endtime="20210908 13:45:48.934"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_allFunctions}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:48.935" level="INFO">Clicking element 'xpath://span[contains(text(),'ALL')]'.</msg>
+<status status="PASS" starttime="20210908 13:45:48.935" endtime="20210908 13:45:49.032"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_apps}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:49.033" level="INFO">Clicking element 'xpath://div[@id='APPS']'.</msg>
+<status status="PASS" starttime="20210908 13:45:49.033" endtime="20210908 13:45:49.305"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_stepInputBox}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:49.307" level="INFO">Clicking element 'xpath://div[@id='filter-section']//input'.</msg>
+<status status="PASS" starttime="20210908 13:45:49.306" endtime="20210908 13:45:49.588"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_stepInputBox}</arg>
+<arg>${connectorName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:49.589" level="INFO">Typing text 'Workday' into text field 'xpath://div[@id='filter-section']//input'.</msg>
+<status status="PASS" starttime="20210908 13:45:49.589" endtime="20210908 13:45:49.809"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>xpath:(//i[@class='com.softwareag.cloudstreams.${connectorNameWithVersion} connector-icon'])[${flowstepnumber}]</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:49.809" endtime="20210908 13:45:49.822"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath:(//i[@class='com.softwareag.cloudstreams.${connectorNameWithVersion} connector-icon'])[${flowstepnumber}]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:49.823" level="INFO">Clicking element 'xpath:(//i[@class='com.softwareag.cloudstreams.workday_v34.0 connector-icon'])[3]'.</msg>
+<status status="PASS" starttime="20210908 13:45:49.822" endtime="20210908 13:45:49.924"/>
+</kw>
+<status status="PASS" starttime="20210908 13:45:43.757" endtime="20210908 13:45:49.924"/>
+</kw>
+<kw name="addCustomOPwithExistingAccount" library="coupaV28_keywords">
+<arg>CustOp_UpdatedCompanyInsiderType</arg>
+<arg>Human Resources</arg>
+<doc>To add customop with existing account</doc>
+<kw name="navigateToAddCustomOperationPage" library="default_keywords">
+<doc>This function will navigate you to add custom operation page from flow service page</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_actionSelectionDropdown}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:49.927" endtime="20210908 13:45:49.942"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_actionSelectionDropdown}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:49.943" level="INFO">Clicking element 'xpath://*[@class='isStepActive']//input[@placeholder='Type to choose action']'.</msg>
+<status status="PASS" starttime="20210908 13:45:49.942" endtime="20210908 13:45:50.027"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_addCustomOperation}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:50.027" endtime="20210908 13:45:50.480"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_addCustomOperation}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:50.480" level="INFO">Clicking element 'xpath://span[@class="custom-action-label"]'.</msg>
+<status status="PASS" starttime="20210908 13:45:50.480" endtime="20210908 13:45:50.598"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_connectToAccountLabel}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:50.598" endtime="20210908 13:45:51.694"/>
+</kw>
+<status status="PASS" starttime="20210908 13:45:49.927" endtime="20210908 13:45:51.694"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_accountSelectionDropdownInAddCustomOperationPage}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:51.694" endtime="20210908 13:45:51.707"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_accountSelectionDropdownInAddCustomOperationPage}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:51.708" level="INFO">Clicking element 'xpath://input[starts-with(@aid,'Connect to')]'.</msg>
+<status status="PASS" starttime="20210908 13:45:51.707" endtime="20210908 13:45:51.801"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:45:53.804" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20210908 13:45:51.801" endtime="20210908 13:45:53.804"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//*[text()='${newCommonAccountName}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:53.805" level="INFO">Clicking element '//*[text()='Auto_1']'.</msg>
+<status status="PASS" starttime="20210908 13:45:53.804" endtime="20210908 13:45:53.909"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_customActionName}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:53.910" endtime="20210908 13:45:53.954"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_customActionName}</arg>
+<arg>${customOperationName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:53.955" level="INFO">Typing text 'CustOp_UpdatedCompanyInsiderType' into text field 'xpath://input[@name='Name']'.</msg>
+<status status="PASS" starttime="20210908 13:45:53.954" endtime="20210908 13:45:54.685"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:45:59.685" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20210908 13:45:54.685" endtime="20210908 13:45:59.685"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_functionalAreaDropdown}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:59.685" endtime="20210908 13:45:59.699"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_functionalAreaDropdown}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:59.700" level="INFO">Clicking element 'xpath://input[@value='Select Value']'.</msg>
+<status status="PASS" starttime="20210908 13:45:59.699" endtime="20210908 13:45:59.804"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath://div[contains(text(),'${functionalArea}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:59.805" level="INFO">Clicking element 'xpath://div[contains(text(),'Human Resources')]'.</msg>
+<status status="PASS" starttime="20210908 13:45:59.805" endtime="20210908 13:45:59.887"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_next_button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:59.887" endtime="20210908 13:45:59.902"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_next_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:45:59.903" level="INFO">Clicking element 'xpath://button[contains(text(),'Next')]'.</msg>
+<status status="PASS" starttime="20210908 13:45:59.903" endtime="20210908 13:45:59.986"/>
+</kw>
+<status status="PASS" starttime="20210908 13:45:49.926" endtime="20210908 13:45:59.987"/>
+</kw>
+<kw name="addCustOpforputCompanyInsiderType" library="workday_keywords">
+<arg>Put_Company_Insider_Type</arg>
+<doc>To Select the Operation and Business objects in creating Custom operation of workday v34</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_searchAction}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:45:59.989" endtime="20210908 13:46:02.574"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_searchAction}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:46:02.574" level="INFO">Clicking element 'xpath://input[@placeholder='Search for action']'.</msg>
+<status status="PASS" starttime="20210908 13:46:02.574" endtime="20210908 13:46:02.690"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_searchAction}</arg>
+<arg>${actionName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210908 13:46:02.691" level="INFO">Typing text 'Put_Company_Insider_Type' into text field 'xpath://input[@placeholder='Search for action']'.</msg>
+<status status="PASS" starttime="20210908 13:46:02.691" endtime="20210908 13:46:03.361"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_putcompanyinsidertypeactionRadioBtnInAddCustomOperationPage}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:46:03.362" level="INFO">Clicking element 'xpath://span[contains(text(),'Put_Company_Insider_Type')]'.</msg>
+<status status="PASS" starttime="20210908 13:46:03.361" endtime="20210908 13:46:03.459"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_next_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:46:03.460" level="INFO">Clicking element 'xpath://button[contains(text(),'Next')]'.</msg>
+<status status="PASS" starttime="20210908 13:46:03.460" endtime="20210908 13:46:03.538"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_done_button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20210908 13:46:03.538" endtime="20210908 13:46:03.575"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_done_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210908 13:46:03.576" level="INFO">Clicking element 'xpath://button[contains(text(),'Done')]'.</msg>
+<status status="PASS" starttime="20210908 13:46:03.576" endtime="20210908 13:46:03.732"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210908 13:46:08.746" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20210908 13:46:03.733" endtime="20210908 13:46:08.746"/>
+</kw>
+<status status="PASS" starttime="20210908 13:45:59.988" endtime="20210908 13:46:08.746"/>
+</kw>
+<kw name="configurePutCompanyInsiderTypeForUpdatePipelineOfWorkdayv34" library="workday_keywords">
+<arg>3</arg>
+<arg>SAG</arg>
+<arg>UpdateCompany</arg>
+<doc>To configure the updateCompanyInsiderType for workdayv34 in pipeline.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>xpath://step-ui/div/div/step-ui[${flowserviceStepNumber}]//span[@title='Edit Mapping']</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20210908 13:48:09.381" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-54.png"&gt;&lt;img src="selenium-screenshot-54.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20210908 13:48:08.865" endtime="20210908 13:48:09.381"/>
+</kw>
+<msg timestamp="20210908 13:48:09.416" level="FAIL">Element 'xpath://step-ui/div/div/step-ui[3]//span[@title='Edit Mapping']' did not appear in 2 minutes.</msg>
+<status status="FAIL" starttime="20210908 13:46:08.748" endtime="20210908 13:48:09.416"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath://step-ui/div/div/step-ui[${flowserviceStepNumber}]//span[@title='Edit Mapping']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.417" endtime="20210908 13:48:09.417"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.417" endtime="20210908 13:48:09.417"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.417" endtime="20210908 13:48:09.417"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.417" endtime="20210908 13:48:09.417"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.418" endtime="20210908 13:48:09.418"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.418" endtime="20210908 13:48:09.418"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.418" endtime="20210908 13:48:09.418"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C1wInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.418" endtime="20210908 13:48:09.418"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C1wInPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.418" endtime="20210908 13:48:09.418"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C1C1wInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.418" endtime="20210908 13:48:09.418"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C1C1wInPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.420" endtime="20210908 13:48:09.420"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.420" endtime="20210908 13:48:09.420"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.420" endtime="20210908 13:48:09.420"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1WorkdayInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.420" endtime="20210908 13:48:09.420"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1WorkdayInPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.420" endtime="20210908 13:48:09.421"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1C1WorkdayInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.421" endtime="20210908 13:48:09.421"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1C1WorkdayInPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.421" endtime="20210908 13:48:09.421"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1C1C1WorkdayInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.421" endtime="20210908 13:48:09.421"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1C1C1WorkdayInPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.421" endtime="20210908 13:48:09.421"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1C1C1C1WorkdayInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.421" endtime="20210908 13:48:09.421"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol1P2C1C1C1C1WorkdayInPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.421" endtime="20210908 13:48:09.421"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.421" endtime="20210908 13:48:09.421"/>
+</kw>
+<kw name="Drag And Drop" library="SeleniumLibrary">
+<arg>${PO_expandCol1wdtypeWorkdayInPipeline}</arg>
+<arg>${PO_expandCol2wdtypeWorkdayInPipeline}</arg>
+<doc>Drags the element identified by ``locator`` into the ``target`` element.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.421" endtime="20210908 13:48:09.421"/>
+</kw>
+<kw name="Drag And Drop" library="SeleniumLibrary">
+<arg>${PO_expandCol1bodyWorkdayInPipeline}</arg>
+<arg>${PO_expandCol2bodyWorkdayInPipeline}</arg>
+<doc>Drags the element identified by ``locator`` into the ``target`` element.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.421" endtime="20210908 13:48:09.421"/>
+</kw>
+<kw name="Drag And Drop" library="SeleniumLibrary">
+<arg>${PO_expandCol1doctypeWorkdayInPipeline}</arg>
+<arg>${PO_expandCol2doctypeWorkdayInPipeline}</arg>
+<doc>Drags the element identified by ``locator`` into the ``target`` element.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.421" endtime="20210908 13:48:09.421"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.421" endtime="20210908 13:48:09.421"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C2InPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.423" endtime="20210908 13:48:09.423"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_expandCol2P1C2C1C2InPipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.423" endtime="20210908 13:48:09.423"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_CompanyInsiderTypeNameInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.423" endtime="20210908 13:48:09.423"/>
+</kw>
+<kw name="Double Click Element" library="SeleniumLibrary">
+<arg>${PO_CompanyInsiderTypeNameInPipeline}</arg>
+<doc>Double clicks the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.423" endtime="20210908 13:48:09.423"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_textFieldInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.423" endtime="20210908 13:48:09.423"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_textFieldInPipeline}</arg>
+<arg>${CompanyInsiderTypeName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.423" endtime="20210908 13:48:09.424"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_saveButtonInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.424" endtime="20210908 13:48:09.424"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${PO_saveButtonInPipeline}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.424" endtime="20210908 13:48:09.424"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_CompanyInsiderTypeDescriptionInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.424" endtime="20210908 13:48:09.424"/>
+</kw>
+<kw name="Double Click Element" library="SeleniumLibrary">
+<arg>${PO_CompanyInsiderTypeDescriptionInPipeline}</arg>
+<doc>Double clicks the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.424" endtime="20210908 13:48:09.424"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_textFieldInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.425" endtime="20210908 13:48:09.425"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PO_textFieldInPipeline}</arg>
+<arg>${CompanyInsiderTypeDescription}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.425" endtime="20210908 13:48:09.425"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_saveButtonInPipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.425" endtime="20210908 13:48:09.425"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${PO_saveButtonInPipeline}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.425" endtime="20210908 13:48:09.425"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.425" endtime="20210908 13:48:09.425"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${PO_closePipeline}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.425" endtime="20210908 13:48:09.425"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_closePipeline}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.425" endtime="20210908 13:48:09.426"/>
+</kw>
+<status status="FAIL" starttime="20210908 13:46:08.747" endtime="20210908 13:48:09.426"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.426" endtime="20210908 13:48:09.426"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${PO_addNewStep}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.426" endtime="20210908 13:48:09.426"/>
+</kw>
+<kw name="SelectConnectorWithVersionInSteps" library="default_keywords">
+<arg>Workday</arg>
+<arg>workday_v34.0</arg>
+<arg>4</arg>
+<doc>This page selects connector in the second step of new flow. Accepts connector name and version as arguments</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.427" endtime="20210908 13:48:09.427"/>
+</kw>
+<kw name="addCustomOPwithExistingAccount" library="coupaV28_keywords">
+<arg>CustOp_GetUpdatedCompanyInsiderType</arg>
+<arg>Human Resources</arg>
+<doc>To add customop with existing account</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.427" endtime="20210908 13:48:09.427"/>
+</kw>
+<kw name="addCustOpforgetCompanyInsiderType" library="workday_keywords">
+<arg>Get_Company_Insider_Type</arg>
+<doc>To Select the Operation and Business objects in creating Custom operation of workday v34</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.428" endtime="20210908 13:48:09.428"/>
+</kw>
+<kw name="configureGetCompanyInsiderTypeForUpdatedPipelineOfWorkdayv34" library="workday_keywords">
+<arg>4</arg>
+<doc>To configure the get-updated-CompanyInsiderType for workdayv34 in pipeline.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.428" endtime="20210908 13:48:09.428"/>
+</kw>
+<kw name="editFlowServiceNameAndSave" library="default_keywords">
+<arg>Workday_v34</arg>
+<doc>This keywords edits the name of FlowService and saves it. Accepts name of FlowService as argument</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.430" endtime="20210908 13:48:09.430"/>
+</kw>
+<kw name="runFlowService" library="default_keywords">
+<doc>This keyword runs a flow service.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.430" endtime="20210908 13:48:09.430"/>
+</kw>
+<kw name="goBacktoFlowServices" library="default_keywords">
+<doc>This keyword takes the user back to FlowServices page from a flowservice.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.430" endtime="20210908 13:48:09.430"/>
+</kw>
+<kw name="deleteFlowService" library="default_keywords">
+<arg>Workday_v34</arg>
+<doc>This keyword deletes a flowservice. Accepts the flowservice name as argument. The name is case sensitive</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.430" endtime="20210908 13:48:09.430"/>
+</kw>
+<kw name="deleteListOfCustomOperations" library="default_keywords">
+<arg>Workday</arg>
+<arg>workday_v34.0</arg>
+<arg>@{Workdayv34_CustOps}</arg>
+<doc>this keyword deletes custom operations</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.430" endtime="20210908 13:48:09.432"/>
+</kw>
+<kw name="selectMainTab" library="default_keywords">
+<arg>Connectors</arg>
+<doc>Selects the tab as per the argument passed after login into wmio. Accepts tab name as argument. Argument is case sensitive</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.432" endtime="20210908 13:48:09.432"/>
+</kw>
+<kw name="deleteAccountsFromConnectorsTab" library="default_keywords">
+<arg>Workday</arg>
+<doc>This keyword deletes the created accounts from connectors tab. Expects the name of connector as argument</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.432" endtime="20210908 13:48:09.432"/>
+</kw>
+<kw name="logoutWmio" library="default_keywords">
+<doc>This keyword logs out the user.</doc>
+<status status="NOT RUN" starttime="20210908 13:48:09.433" endtime="20210908 13:48:09.433"/>
+</kw>
+<doc>This testcase creates a new FlowService for Workday then executes CRUD and deletes the created FlowService</doc>
+<status status="FAIL" starttime="20210908 13:42:51.868" endtime="20210908 13:48:09.433">Element 'xpath://step-ui/div/div/step-ui[3]//span[@title='Edit Mapping']' did not appear in 2 minutes.</status>
+</test>
+<kw name="Run Keywords" library="BuiltIn" type="TEARDOWN">
+<arg>close all browsers</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Close All Browsers" library="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" starttime="20210908 13:48:09.436" endtime="20210908 13:48:12.100"/>
+</kw>
+<status status="PASS" starttime="20210908 13:48:09.436" endtime="20210908 13:48:12.101"/>
+</kw>
+<status status="FAIL" starttime="20210908 13:42:50.177" endtime="20210908 13:48:12.101"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="nfe Testsuite regression">nfe Testsuite regression</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
